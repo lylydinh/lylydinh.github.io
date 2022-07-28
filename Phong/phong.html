@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Vũ Văn Phong: Table gộp dòng, gộp cột</title>
+</head>
+
+<body>
+    <table width="600px" height="700px" border="1px">
+        <colgroup>
+            <col width="100px" />
+            <col width="100px" />
+            <col width="100px" />
+            <col width="100px" />
+            <col width="100px" />
+            <col width="100px" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th colspan="5">Bài tập về nhà của phong</th>
+                <th>Dòng</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--dòng 1-->
+            <tr>
+                <td style="background: white"></td>
+                <td style="background: white"></td>
+                <td style="background: white"></td>
+                <td style="background: white"></td>
+                <td style="background: orange" rowspan="3"></td>
+                <td style="background: white">DÒNG 1</td>
+            </tr>
+            <!--dòng 2-->
+            <tr>
+                <td style="background: white"></td>
+                <td style="background: red" colspan="3"></td>
+                <td style="background: white">DÒNG 2</td>
+            </tr>
+            <tr>
+                <td style="background: white"></td>
+                <td style="background: white"></td>
+                <td style="background: white"></td>
+                <td style="background: white"></td>
+                <td style="background: white">DÒNG 3</td>
+            </tr>
+            <tr>
+                <td style="background: white"></td>
+                <td style="background: white"></td>
+                <td style="background: white"></td>
+                <td style="background: white"></td>
+                <td style="background: white"></td>
+                <td style="background: white">DÒNG 4</td>
+            </tr>
+            <tr>
+                <td style="background: white"></td>
+                <td style="background: white"></td>
+                <td style="background: yellow" rowspan="4"></td>
+                <td style="background: blue" rowspan="3"></td>
+                <td style="background: white"></td>
+                <td style="background: white">DÒNG 5</td>
+            </tr>
+            <tr>
+                <td style="background: white"></td>
+                <td style="background: white"></td>
+                <td style="background: white"></td>
+                <td style="background: white">DÒNG 6</td>
+            </tr>
+            <tr>
+                <td style="background: white"></td>
+                <td style="background: white"></td>
+                <td style="background: white"></td>
+                <td style="background: white">DÒNG 7</td>
+            </tr>
+            <tr>
+                <td style="background: green" colspan="2"></td>
+                <td style="background: white"></td>
+                <td style="background: white"></td>
+                <td style="background: white">DÒNG 8</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>
