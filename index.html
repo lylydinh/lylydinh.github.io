@@ -15,17 +15,39 @@
 </head>
 
 <body>
-    <!--[if lt IE 7]>
-      <p class="browsehappy">
-        You are using an <strong>outdated</strong> browser. Please
-        <a href="#">upgrade your browser</a> to improve your experience.
-      </p>
-    <![endif]-->
-    <h1>Giao diện lập trình khóa 1:</h1>
-    <a href="Xuân/xuan.html">Xuân</a>
-    <a href="Phong/phong.html">Phong</a>
-    <a href="Đạt/dat.html">Đạt</a>
-    <a href="Tấn/tan.html">Tấn</a>
+  
+<label for="inputText">Nhập chuỗi:</label>
+
+<input type="text" id="inputText" style="min-width: 300px; min-height: 100px;" onchange="xuLyChuoi()">
+<br>
+<br>  
+<div id="ketQua"></div>
+
+<script>
+    function loaiBoSoVaKyTuDacBiet(chuoi) {
+      // Loại bỏ số và ký tự đặc biệt, chỉ giữ lại dấu cách
+      var chuoiDaXuLy = chuoi.replace(/[^\sa-zA-Z]/g, '');
+
+      // Loại bỏ dấu cách thừa
+      chuoiDaXuLy = chuoiDaXuLy.replace(/\s+/g, ' ');
+
+      return chuoiDaXuLy.trim(); // Loại bỏ dấu cách ở đầu và cuối chuỗi
+    }
+
+    function xuLyChuoi() {
+      var inputElement = document.getElementById("inputText");
+      var ketQuaElement = document.getElementById("ketQua");
+
+      // Lấy giá trị từ textbox
+      var chuoiNhap = inputElement.value.trim();
+
+      // Xử lý chuỗi
+      var chuoiDaXuLy = loaiBoSoVaKyTuDacBiet(chuoiNhap); 
+      // Hiển thị kết quả lên màn hình
+      ketQuaElement.textContent = "Chuỗi sau khi xử lý: " + chuoiDaXuLy;
+      inputElement.value=chuoiDaXuLy;
+    }
+</script>
     <script src="" async defer></script>
 </body>
 
