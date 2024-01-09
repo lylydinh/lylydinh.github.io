@@ -21,8 +21,11 @@
 <input type="text" id="inputText" style="min-width: 300px; min-height: 100px;" onchange="xuLyChuoi()">
 <br>
 <br>  
-<div id="ketQua"></div>
+<div id="ketQuaHienThi"></div>
+<div id="ketQua" style="display: none;"></div>
 
+<br>  
+<button onclick="saoChepKetQua()">Copy</button>
 <script>
     function loaiBoSoVaKyTuDacBiet(chuoi) {
       // Loại bỏ số và ký tự đặc biệt, chỉ giữ lại dấu cách
@@ -36,6 +39,7 @@
 
     function xuLyChuoi() {
       var inputElement = document.getElementById("inputText");
+      var ketQuaHienThi = document.getElementById("ketQuaHienThi");
       var ketQuaElement = document.getElementById("ketQua");
 
       // Lấy giá trị từ textbox
@@ -44,9 +48,34 @@
       // Xử lý chuỗi
       var chuoiDaXuLy = loaiBoSoVaKyTuDacBiet(chuoiNhap); 
       // Hiển thị kết quả lên màn hình
-      ketQuaElement.textContent = "Chuỗi sau khi xử lý: " + chuoiDaXuLy;
+      ketQuaHienThi.textContent = "Chuỗi sau khi xử lý: " + chuoiDaXuLy;
+      ketQuaElement.textContent = chuoiDaXuLy;
       inputElement.value=chuoiDaXuLy;
     }
+    
+function saoChepKetQua() {
+  var ketQuaElement = document.getElementById("ketQua");
+
+  // Tạo một thẻ textarea để sao chép nội dung
+  var textarea = document.createElement("textarea");
+  textarea.value = ketQuaElement.textContent;
+
+  // Thêm textarea vào DOM
+  document.body.appendChild(textarea);
+
+  // Chọn toàn bộ nội dung trong textarea
+  textarea.select();
+  textarea.setSelectionRange(0, 99999); // Đối với một số trình duyệt di động
+
+  // Sao chép nội dung vào clipboard
+  document.execCommand("copy");
+
+  // Loại bỏ textarea khỏi DOM
+  document.body.removeChild(textarea);
+
+  // Thông báo hoặc cập nhật UI nếu cần thiết
+  // alert("Đã sao chép: " + ketQuaElement.textContent);
+}
 </script>
     <script src="" async defer></script>
 </body>
