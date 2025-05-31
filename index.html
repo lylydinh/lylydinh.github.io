@@ -1,83 +1,41 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
-<html>
-
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title></title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="" />
+  <meta charset="UTF-8">
+  <title>QR Code Reader</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+    #reader { width: 300px; margin: auto; }
+    input[type="text"] { width: 80%; padding: 10px; font-size: 16px; }
+  </style>
 </head>
-
 <body>
-  
-<label for="inputText">Nhập chuỗi:</label>
 
-<input type="text" id="inputText" style="min-width: 300px; min-height: 100px;" onchange="xuLyChuoi()">
-<br>
-<br>  
-<div id="ketQuaHienThi"></div>
-<div id="ketQua" style="display: none;"></div>
+  <h2>Quét mã QR từ webcam</h2>
 
-<br>  
-<button onclick="saoChepKetQua()">Copy</button>
-<script>
-    function loaiBoSoVaKyTuDacBiet(chuoi) {
-      // Loại bỏ số và ký tự đặc biệt, chỉ giữ lại dấu cách
-      var chuoiDaXuLy = chuoi.replace(/[^\sa-zA-Z]/g, '');
+  <!-- Ô input để nhận giá trị từ QR code -->
+  <input type="text" id="qr-value" placeholder="QR Code sẽ hiển thị ở đây" readonly />
 
-      // Loại bỏ dấu cách thừa
-      chuoiDaXuLy = chuoiDaXuLy.replace(/\s+/g, ' ');
+  <!-- Vùng hiển thị camera để quét QR -->
+  <div id="reader"></div>
 
-      return chuoiDaXuLy.trim(); // Loại bỏ dấu cách ở đầu và cuối chuỗi
+  <!-- Gắn thư viện html5-qrcode offline -->
+  <script src="html5-qrcode.min.js"></script>
+  <script>
+    // Hàm xử lý kết quả QR code
+    function onScanSuccess(decodedText, decodedResult) {
+      document.getElementById("qr-value").value = decodedText;
+      html5QrcodeScanner.clear(); // Dừng quét sau khi nhận QR
     }
 
-    function xuLyChuoi() {
-      var inputElement = document.getElementById("inputText");
-      var ketQuaHienThi = document.getElementById("ketQuaHienThi");
-      var ketQuaElement = document.getElementById("ketQua");
+    // Cấu hình quét QR
+    let html5QrcodeScanner = new Html5QrcodeScanner(
+      "reader", 
+      { fps: 10, qrbox: 250 },
+      false
+    );
 
-      // Lấy giá trị từ textbox
-      var chuoiNhap = inputElement.value.trim();
-
-      // Xử lý chuỗi
-      var chuoiDaXuLy = loaiBoSoVaKyTuDacBiet(chuoiNhap); 
-      // Hiển thị kết quả lên màn hình
-      ketQuaHienThi.textContent = "Chuỗi sau khi xử lý: " + chuoiDaXuLy;
-      ketQuaElement.textContent = chuoiDaXuLy;
-      inputElement.value=chuoiDaXuLy;
-    }
-    
-function saoChepKetQua() {
-  var ketQuaElement = document.getElementById("ketQua");
-
-  // Tạo một thẻ textarea để sao chép nội dung
-  var textarea = document.createElement("textarea");
-  textarea.value = ketQuaElement.textContent;
-
-  // Thêm textarea vào DOM
-  document.body.appendChild(textarea);
-
-  // Chọn toàn bộ nội dung trong textarea
-  textarea.select();
-  textarea.setSelectionRange(0, 99999); // Đối với một số trình duyệt di động
-
-  // Sao chép nội dung vào clipboard
-  document.execCommand("copy");
-
-  // Loại bỏ textarea khỏi DOM
-  document.body.removeChild(textarea);
-
-  // Thông báo hoặc cập nhật UI nếu cần thiết
-  // alert("Đã sao chép: " + ketQuaElement.textContent);
-}
-</script>
-    <script src="" async defer></script>
+    html5QrcodeScanner.render(onScanSuccess);
+  </script>
 </body>
-
 </html>
